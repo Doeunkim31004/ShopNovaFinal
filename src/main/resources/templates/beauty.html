@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>화장품</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/css/beauty.css">
+</head>
+<body>
+ <!-- 헤더 -->
+    <header>
+        <a href="/" style="text-decoration: none;">
+            <h1>ShopNova</h1>
+        </a>
+		<form id="search-form" action="/search" method="GET" style="flex-grow: 1; margin: 0 20px;">
+	   		<input type="text" id="search-input" class="search-input" placeholder="상품을 검색하세요." name="query">
+			<!-- 검색 아이콘을 버튼으로 변경 -->
+			<a href="javascript:;" id="headerSearchBtn" class="search" title="검색">
+				<i class="fas fa-search"></i> <!-- Font Awesome 검색 아이콘 추가 -->
+			</a>
+		</form>
+	    <div class="login-container">
+	    	<!-- 로그인 상태에 따라 버튼을 다르게 표시 -->
+	        <div th:if="${currentUser == null}">
+	        	<div class="btn-box">
+	        	<div class="viewOrderList">
+	        			<a href="/users/login">
+	        			<i class="fa-solid fa-right-to-bracket"></i>
+	        			</a>
+	           		    <a href="/users/login">로그인</a>
+	        	</div>
+	        	<div class="viewOrderList">
+	        		<a href="/users/signUp">
+	        		<i class="fa-solid fa-user-plus"></i>
+	        		</a>
+    				<a href="/users/signUp">회원가입</a>
+				</div> 
+	    	</div>
+	       	</div>
+	        <div th:if="${currentUser != null}">
+	        	<div class="btn-box">
+	        	<div class="viewOrderList">
+	        			<a href="/users/mypage">
+	        			<i class="fa-solid fa-circle-user"></i>
+	        			</a>
+	           		    <a href="/users/mypage">마이페이지</a>
+	        	</div>
+	        	<div class="viewOrderList">
+	        		<form action="/users/logout" method="post">
+        			<button type="submit" class="logout-btn">
+            		<i class="fa-solid fa-right-from-bracket"></i> 로그아웃
+       			    </button>
+    			</form>
+				</div> 
+	    	</div>
+	        </div>
+		</div>
+    </header>
+    
+	<nav class="menu">
+	    <a th:href="@{/electronics}">전자제품</a>
+	    <a th:href="@{/clothing}">의류</a>
+	    <a th:href="@{/food}">식품</a>
+	    <a th:href="@{/beauty}">화장품</a>
+	    <a th:href="@{/sports}">스포츠</a>
+	</nav>
+
+	<h1>화장품</h1>
+	<!-- 가격 정렬 옵션 -->
+	<div style="padding: 10px;">
+		<label for="sortPrice">가격 정렬:</label>
+		<select id="sortPrice" onchange="sortProducts()">
+			<option value="asc" th:selected="${sort == 'asc'}">가격 낮은 순</option>
+		    <option value="desc" th:selected="${sort == 'desc'}">가격 높은 순</option>
+		</select>
+	</div>
+	
+    <div class="container">
+        <div th:each="product : ${products}">
+            <!-- 상품 클릭 시 product.html로 이동 -->
+            <a th:href="@{/product(id=${product.id})}" style="text-decoration: none; color: inherit;">
+                <div class="product">
+                    <img th:src="${product.image}" alt="상품 이미지">
+                    <h3 th:text="${product.name}">상품명</h3>
+                    <p class="price" th:text="${product.price} + '원'">가격</p>
+                    <p th:text="${product.description}">설명</p>
+                </div>
+            </a> <!-- ⬅️ a 태그를 올바르게 닫음 -->
+        </div>
+    </div>
+    <script src="/js/beauty.js"></script>
+</body>
+</html>

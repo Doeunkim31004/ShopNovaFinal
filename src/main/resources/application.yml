@@ -1,0 +1,75 @@
+server:
+  port: 8081  # 서버 포트 설정 (8081 또는 8080 사용 가능)
+
+spring:
+  # 데이터베이스 설정 (H2)
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/shopnova # 서버 모드로 설정
+    username: sa
+    password: ''
+    driver-class-name: org.h2.Driver
+
+  # JPA 설정 (Hibernate)
+  jpa:
+    hibernate:
+      ddl-auto: update  # DB 테이블 자동 생성 / 업데이트 (배포 환경에서는 'update' 추천)
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.H2Dialect
+
+  # H2 콘솔 설정 (로컬에서 H2 DB 콘솔을 사용할 수 있도록 설정)
+  h2:
+    console:
+      enabled: true  # H2 콘솔 활성화
+
+  # 메일 서버 설정
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: your-email@gmail.com  # 실제 이메일로 교체
+    password: your-email-password   # 실제 이메일 비밀번호로 교체
+    protocol: smtp
+    tls: true
+    ssl: false
+    default-encoding: UTF-8
+
+  # 로깅 설정 (Hibernate SQL 로그 출력)
+  logging:
+    level:
+      org.hibernate.SQL: debug  # Hibernate SQL 쿼리 로그 출력
+      org.hibernate.type.descriptor.sql.BasicBinder: trace  # 바인딩 변수 로그 출력
+
+  # 서버 포트 설정 및 세션 타임아웃 설정
+  servlet:
+    session:
+      timeout: 30m  # 세션 타임아웃을 30분으로 설정 (시간 단위: m = 분, s = 초)
+      cookie:
+        name: JSESSIONID  # 세션 쿠키 이름
+        http-only: true  # JavaScript에서 세션 쿠키에 접근하지 못하도록 설정
+        secure: false  # HTTPS 연결이 아니면 쿠키를 전송하지 않도록 설정
+
+  # Twilio API 설정
+  twilio:
+    accountSid: "your_account_sid_here"  # Twilio의 실제 accountSid로 교체
+    authToken: "your_auth_token_here"    # Twilio의 실제 authToken으로 교체
+    phoneNumber: "your_twilio_phone_number_here"  # Twilio의 실제 전화번호로 교체
+
+  naver:
+    clientId: lB3HLLJuvztYmJr_soDB  # 환경 변수로 설정 (보안 이유)
+    clientSecret: 4IDF2ASNh7  # 환경 변수로 설정 (보안 이유)
+    redirectUri: http://localhost:8081/naver/naverLogin  # 네이버 로그인 리디렉션 URI=
+
+  # 타임리프 설정
+  thymeleaf:
+    prefix: classpath:/templates/  # 템플릿 경로 설정
+    suffix: .html  # 파일 확장자 설정
+    mode: HTML  # HTML 모드
+    encoding: UTF-8  # 문자 인코딩
+    cache: false  # 개발 시에는 캐시를 끄는 것이 좋습니다.
+
+  # KG이니시스 결제 API 설정
+  kginicis:
+    channel-key: channel-key-112cb04a-bdbd-4d13-963d-486f3e9b2645
+    mid: INIpayTest
+    signkey: SU5JTElURV9UUklQTEVERVNfS0VZU1RS

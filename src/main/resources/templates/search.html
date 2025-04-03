@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>검색 결과</title>
+	<link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+	<link rel="stylesheet" href="/css/search.css">
+</head>
+<body>
+	 <!-- 헤더 -->
+    <header>
+        <a href="/" style="text-decoration: none;">
+            <h1>ShopNova</h1>
+        </a>
+       <form id="search-form" action="/search" method="GET" style="flex-grow: 1; margin: 0 20px;">
+   		 <input type="text" id="search-input" class="search-input" placeholder="상품을 검색하세요." name="query">
+   		 <!-- 검색 아이콘을 버튼으로 변경 -->
+   		 <a href="javascript:;" id="headerSearchBtn" class="search" title="검색">
+        	<i class="fas fa-search"></i> <!-- Font Awesome 검색 아이콘 추가 -->
+   		 </a>
+		</form>
+        <div class="login-container">
+            <!-- 로그인 상태에 따라 버튼을 다르게 표시 -->
+            <div th:if="${currentUser == null}">
+                <div class="btn-box">
+	        	<div class="viewOrderList">
+	        			<a href="/users/login">
+	        			<i class="fa-solid fa-right-to-bracket"></i>
+	        			</a>
+	           		    <a href="/users/login">로그인</a>
+	        	</div>
+	        	<div class="viewOrderList">
+	        		<a href="/users/signUp">
+	        		<i class="fa-solid fa-user-plus"></i>
+	        		</a>
+    				<a href="/users/signUp">회원가입</a>
+				</div> 
+	    	</div>
+            </div>
+            <div th:if="${currentUser != null}">
+                <div class="btn-box">
+	        	<div class="viewOrderList">
+	        			<a href="/users/mypage">
+	        			<i class="fa-solid fa-circle-user"></i>
+	        			</a>
+	           		    <a href="/users/mypage">마이페이지</a>
+	        	</div>
+	        	<div class="viewOrderList">
+	        		<form action="/users/logout" method="post">
+        			<button type="submit" class="logout-btn">
+            		<i class="fa-solid fa-right-from-bracket"></i> 로그아웃
+       			    </button>
+    			</form>
+				</div> 
+	    	</div>
+            </div>
+        </div>
+    </header>
+    
+     <!-- 메뉴 -->
+    <nav class="menu">
+        <a href="/electronics">전자제품</a> 
+        <a href="/clothing">의류</a>
+        <a href="/food">식품</a>
+        <a href="/beauty">화장품</a>
+        <a href="/sports">스포츠</a>
+    </nav>
+    
+    <h3>"<span th:text="${query}">검색어</span>"에 대한 검색 결과</h3>
+    <div class="container">
+        <div th:each="product : ${searchResults}" class="product">
+            <a th:href="@{/product(id=${product.id})}" style="text-decoration: none; color: inherit;">
+                <img th:src="@{${product.image}}" alt="상품 이미지">
+                <h3 th:text="${product.name}">상품명</h3>
+                <p class="price" th:text="${product.price} + '원'">가격</p>
+                <p th:text="${product.description}">설명</p>
+            </a>
+        </div>
+    </div>
+	<script src="/js/search.js"></script>
+</body>
+</html>

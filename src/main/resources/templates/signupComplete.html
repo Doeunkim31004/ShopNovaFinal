@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입 완료</title>
+    <link rel="stylesheet" href="/css/signupComplete.css">
+</head>
+<body>
+    <div class="signup-container">
+        <h1>ShopNova</h1>
+        <div class="message" th:text="${signupMessage}"></div> <!-- 네이버 회원가입 메시지 -->
+        <a href="/" style="color: blue;">홈으로 돌아가기</a>
+    </div>
+</body>
+</html>

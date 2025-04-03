@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>장바구니</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/css/cart.css">
+</head>
+<body>
+	<!-- 헤더 -->
+	<header>
+	    <a href="/" style="text-decoration: none;">
+	        <h1>ShopNova</h1>
+	    </a>
+	   <form id="search-form" action="/search" method="GET" style="flex-grow: 1; margin: 0 20px;">
+	      <input type="text" id="search-input" class="search-input" placeholder="상품을 검색하세요." name="query">
+	      <a href="javascript:;" id="headerSearchBtn" class="search" title="검색">
+	       <i class="fas fa-search"></i> <!-- Font Awesome 검색 아이콘 추가 -->
+	      </a>
+	  </form>
+	    <div class="login-container">
+	        <div th:if="${currentUser == null}">
+	            <div class="btn-box">
+	        	<div class="viewOrderList">
+	        			<a href="/users/login">
+	        			<i class="fa-solid fa-right-to-bracket"></i>
+	        			</a>
+	           		    <a href="/users/login">로그인</a>
+	        	</div>
+	        	<div class="viewOrderList">
+	        		<a href="/users/signUp">
+	        		<i class="fa-solid fa-user-plus"></i>
+	        		</a>
+    				<a href="/users/signUp">회원가입</a>
+				</div> 
+	    	</div>
+	        </div>
+	        <div th:if="${currentUser != null}">
+	            <div class="btn-box">
+	        	<div class="viewOrderList">
+	        			<a href="/users/mypage">
+	        			<i class="fa-solid fa-circle-user"></i>
+	        			</a>
+	           		    <a href="/users/mypage">마이페이지</a>
+	        	</div>
+	        	<div class="viewOrderList">
+	        		<form action="/users/logout" method="post">
+        			<button type="submit" class="logout-btn">
+            		<i class="fa-solid fa-right-from-bracket"></i> 로그아웃
+       			    </button>
+    			</form>
+				</div> 
+	    	</div>
+	        </div>
+	    </div>
+	</header>
+
+	<nav class="menu">
+	    <a th:href="@{/electronics}">전자제품</a>
+	    <a th:href="@{/clothing}">의류</a>
+	    <a th:href="@{/food}">식품</a>
+	    <a th:href="@{/beauty}">화장품</a>
+	    <a th:href="@{/sports}">스포츠</a>
+	</nav>
+	
+	<div class="container">
+		<h2>장바구니</h2>
+		<form action="/order/orderPayment" method="POST">
+		    <ul>
+		        <p th:if="${#lists.isEmpty(cartItems)}">장바구니가 비어 있습니다.</p>
+		        <div id="cart-items">
+		            <div th:each="item : ${cartItems}" class="cart-item" th:data-cart-item-id="${item.cartItemId}" th:data-product-id="${item.product.id}">
+		                <input type="checkbox" name="selectedItemIds" th:value="${item.product.id}" onchange="updateTotal()">
+		                <img th:src="@{${item.product.image}}" alt="상품 이미지" style="cursor: pointer;" 
+		                     th:onclick="'goToProductDetail(' + ${item.product.id} + ')'" />
+		                <div class="item-details">
+		                    <p class="item-name" style="cursor: pointer;" 
+		                       th:onclick="'goToProductDetail(' + ${item.product.id} + ')'" 
+		                       th:text="${item.product.name}"></p>
+		                    <p class="item-price" th:text="${#numbers.formatDecimal(item.price, 0, '0')}"></p>
+		                </div>
+		                <div class="quantity">
+		                    <h4>수량 :</h4><input class="quantity-value" th:value="${item.quantity}" min="1" th:data-index="${item.cartItemId}" readonly>
+		                </div>
+		                <button type="button" th:onclick="'removeItem(' + ${item.cartItemId} + ', event)'" class="remove-item-btn">삭제</button>
+		            </div>
+		        </div>
+		        <p class="total-price">총 주문 금액: <span id="totalAmount" th:text="${totalAmount}">0</span> 원</p>
+		        <button type="button" class="checkout-button" onclick="goToCheckout()">선택한 상품 구매</button>
+		        
+		        <div id="selectedProductIdsContainer"></div> <!-- 선택한 상품의 ID를 표시할 div 태그 -->
+		    </ul>
+		</form>
+	</div>
+	<script src="/js/cart.js"></script>
+</body>
+</html>

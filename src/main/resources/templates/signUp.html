@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <link rel="stylesheet" href="/css/signUp.css">
+</head>
+<body>
+    <div class="signup-container">
+        <header>
+            <h1>ShopNova</h1>
+        </header>
+
+        <!-- 회원가입 폼 -->
+        <form th:action="@{/users/signUp}" method="post" id="signupForm">
+            <input type="text" name="userId" id="userId" placeholder="아이디" required>
+            <input type="text" name="name" id="name" placeholder="이름" required>
+            
+            <!-- 이메일 입력란 (느슨한 패턴) -->
+            <div>
+                <input type="email" name="email" id="email" placeholder="이메일" required 
+                       pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+$" 
+                       title="이메일 형식이 올바르지 않습니다.">
+            </div>
+            
+            <!-- 비밀번호 입력란 (최소 6자 이상) -->
+            <div>
+                <input type="password" name="password" id="password" placeholder="비밀번호" required
+                       minlength="6" 
+                       title="비밀번호는 최소 6자 이상이어야 합니다.">
+            </div>
+
+            <input type="text" name="phone" id="phone" placeholder="전화번호" required>
+            <input type="text" name="address" id="address" placeholder="주소" required>
+            <button type="submit" id="submitBtn" class="submitBtn">회원가입</button>
+        </form>
+
+        <div th:if="${error}" class="error-message">
+            <p th:text="${error}"></p>  <!-- 이메일 중복 오류 메시지 표시 -->
+        </div>
+
+        <!-- 네이버 로그인 버튼 -->
+        <button class="naver-login-button" id="naverLoginBtn" onclick="naverLogin()">네이버 아이디로 회원가입</button>
+    </div>
+	<script src="/js/signUp.js"></script>
+</body>
+</html>

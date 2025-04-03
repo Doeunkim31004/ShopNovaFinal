@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>주문 목록</title>
+    <link rel="stylesheet" href="/css/orderList.css">
+</head>
+<body>
+<header>
+	 <a href="/" style="text-decoration: none;">
+        <h1>ShopNova</h1>
+      </a>
+</header>
+    <div class="container">
+        <h2>주문 목록</h2>
+
+        <!-- 로그인 사용자 정보 출력 -->
+        <div class="user-info">
+            <p>사용자: <span th:text="${user.name}">사용자 이름</span></p>
+        </div>
+
+        <!-- 주문 목록 -->
+        <div class="order-list">
+            <div class="order-card" th:each="order : ${orders}">
+                <div class="order-header">
+                    <h3 th:text="${order.user.name}">주문자 이름</h3>
+                    <span class="order-status" th:text="${order.status}">배송 상태</span>
+                </div>
+                <div class="order-details">
+                    <div class="detail-row">
+                        <strong>상품명:</strong>
+                        <span th:text="${order.productName}">상품 이름</span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>상품 수량:</strong>
+                        <span th:text="${order.productQuantity}">상품 수량</span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>받는 사람:</strong>
+                        <span th:text="${order.recipientName}">받는 사람</span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>주소:</strong>
+                        <span th:text="${order.deliveryAddress}">배송 주소</span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>주문 날짜:</strong>
+                        <span th:text="${#temporals.format(order.orderDate, 'yyyy-MM-dd HH:mm:ss')}">주문 날짜</span>
+                    </div>
+                    <div class="detail-row">
+                        <strong>휴대폰 번호:</strong>
+                        <span th:text="${order.phoneNumber}">휴대폰 번호</span>
+                    </div>
+                    <div class="detail-row total-price">
+                        <strong>결제 금액:</strong>
+                        <span th:text="${order.totalProductPrice} + 원">결제 금액</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="back-btn">
+            <a href="/users/mypage">내 정보로 돌아가기</a>
+        </div>
+    </div>
+</body>
+</html>

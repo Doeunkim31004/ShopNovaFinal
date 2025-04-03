@@ -1,0 +1,249 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f1f1f1;
+}
+
+header {
+    background-color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 32px;
+    font-weight: bold;
+    background: linear-gradient(to right, #0033A0, #FF6600, #0099FF, #FFD700);
+    -webkit-background-clip: text;
+    color: transparent;
+    margin: 0;
+    cursor: pointer;
+}
+
+.search-container {
+    flex-grow: 1;
+    margin: 0 20px;
+}
+
+.search-input {
+    width: 100%;
+    max-width: 500px;
+    padding: 8px;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+/*.login-container a {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: white;
+    background-color: #0033A0;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-left: 10px;
+}
+
+.login-container a:hover {
+    background-color: #FFD700;
+    color: #0033A0;
+}
+*/
+
+#headerSearchBtn {
+    font-size: 20px; /* 아이콘 크기 조정 */
+    color: #0033A0; /* 아이콘 색상 */
+    padding: 10px;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+#headerSearchBtn:hover {
+    color: #FFD700; /* 호버 시 아이콘 색상 변경 */
+}
+
+/* 메뉴 스타일 */
+.menu {
+    display: flex;
+    justify-content: center;
+    background-color: #f9f9f9;
+    padding: 10px 0;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #333;
+    margin: 0 15px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.menu a:hover {
+    color: #0033A0;
+}
+
+.container {
+   display: flex;
+    gap: 20px;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.product-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-image img {
+    width: 100%;
+    max-width: 300px;
+    border-radius: 8px;
+}
+
+.product-details {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.product-info {
+    flex: 2; /* 상품 정보가 2의 비율로 차지 */
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* 요소 간격 */
+} 
+
+.price {
+    color: red;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* 별점 스타일 */
+.rating {
+    font-size: 24px;
+    color: gold;
+    margin: 10px 0;
+}
+
+/* 수량 선택 */
+.quantity {
+    margin-top: 10px;
+    font-size: 16px;
+}
+
+.quantity input {
+    width: 50px;
+    padding: 5px;
+    font-size: 16px;
+    text-align: center;
+}
+
+/* 구매 버튼 스타일 */
+.buy-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+}
+
+.cart {
+    background-color: #0033A0;
+    color: white;
+}
+
+.buy {
+    background-color: #FF6600;
+    color: white;
+}
+
+.cart:hover {
+    background-color: #002366;
+}
+
+.buy:hover {
+    background-color: #FF4500;
+}
+
+.btn-box {
+    display: flex;
+    gap: 15px; /* 버튼 간격 조정 */
+    align-items: center;
+}
+.viewOrderList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    padding: 3px; /* 패딩 최소화 */
+    height: auto;
+}
+
+.viewOrderList a {
+    color: black;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* 세로 정렬 */
+    padding: 2px; /* 내부 패딩 최소화 */
+    text-align: center;
+    font-size: 12px; /* 텍스트 크기 더 줄이기 */
+    line-height: 1; /* 줄 간격 줄이기 */
+}
+
+.viewOrderList a i {
+    font-size: 14px; /* 아이콘 크기 더 줄이기 */
+    margin-bottom: 1px; /* 간격 최소화 */
+}
+
+/* hover 효과 */
+.viewOrderList:hover {
+    background-color: #FDF7F4;
+}
+
+/* 버튼 스타일 */
+.logout-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px; /* 아이콘과 텍스트 간격 */
+    background-color: white;
+    color: black;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 8px 12px; /* 크기 조정 */
+    font-size: 12px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* 아이콘 스타일 */
+.logout-btn i {
+    font-size: 16px; /* 아이콘 크기 */
+}
+
+/* hover 효과 */
+.logout-btn:hover {
+    background-color: #FDF7F4;
+}
+

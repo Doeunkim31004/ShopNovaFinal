@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>매출 조회</title>
+    <link rel="stylesheet" href="/../css/sales.css">
+       
+</head>
+<body>
+<header>
+	<a href="/" style="text-decoration: none;">
+        <h1>ShopNova</h1>
+    </a>
+</header>
+
+<div class="container">
+    <h2>매출 조회</h2>
+
+    <!-- 총 결제 금액 출력 -->
+    <h3 class="total-sales" th:if="${totalSales != null}">
+        총 매출 금액: <span th:text="${#numbers.formatInteger(totalSales, 0, 'COMMA')}"></span> 원
+    </h3>
+
+    <!-- 결제 내역이 없을 때 메시지 -->
+    <h3 class="total-sales" th:if="${#lists.isEmpty(payments)}">주문 내역이 없습니다.</h3>
+
+    <!-- 결제 내역이 있을 때 테이블 -->
+    <table th:if="${!#lists.isEmpty(payments)}">
+        <thead>
+            <tr>
+                <th>결제 번호</th>
+                <th>결제 방법</th>
+                <th>결제 금액</th>
+                <th>결제 일자</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="payment : ${payments}">
+                <td th:text="${payment.paymentId}"></td>  <!-- 결제 번호 -->
+                <td th:text="${payment.paymentMethod}"></td>  <!-- 결제 방법 -->
+                <td th:text="${#numbers.formatInteger(payment.paymentAmount, 0, 'COMMA')}"></td>  <!-- 결제 금액 -->
+                <td th:text="${payment.paymentDate}"></td>  <!-- 결제 일자 -->
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<footer class="footer">
+    &copy; 2025 ShopNova. 모든 권리 보유.
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Buttons</title>
+</head>
+<body>
+
+<!-- 로그인 상태에 따라 버튼을 다르게 보여주기 위한 프래그먼트 -->
+<div th:fragment="loginButtons">
+    <!-- 로그인되지 않은 상태에서 보여줄 버튼 -->
+    <div th:if="${user == null}">
+        <button class="naver-login-btn" id="naver-id-login">네이버로 로그인</button>
+        <button type="submit">로그인</button>
+        <!-- 회원가입 버튼 추가 -->
+        <button class="signUp-btn" onclick="window.location.href='/users/signUp'">회원가입</button>
+    </div>
+
+    <!-- 로그인된 상태에서 보여줄 버튼 -->
+    <div th:if="${user != null}">
+        <button class="home-btn" onclick="window.location.href='/users/mypage'">마이페이지</button>
+        <button class="logout-btn" onclick="logout()">로그아웃</button>
+    </div>
+</div>
+
+</body>
+</html>
+

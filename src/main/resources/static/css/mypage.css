@@ -1,0 +1,179 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+header h1 {
+    font-size: 32px;
+    font-weight: bold;
+    background: linear-gradient(to right, #0033A0, #FF6600, #0099FF, #FFD700);
+    -webkit-background-clip: text;
+    color: transparent;
+    margin: 0;
+    cursor: pointer;
+}
+
+
+
+/* 버튼 스타일 */
+.cart-link, .logout-link, .order-link, .home-link {
+    background-color: #007BFF;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.cart-link a, .logout-link a, .order-link a, .home-link a {
+    color: white;
+    text-decoration: none;
+    display: inline-block;
+    padding: 12px;
+}
+
+.cart-link:hover, .logout-link:hover, .order-link:hover, .home-link:hover {
+    background-color: #0056b3;
+}
+
+/* 마이페이지 컨테이너 */
+.mypage-container {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* 제목 */
+h2 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+/* 폼 스타일 */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* 라벨 */
+label {
+    font-size: 16px;
+    color: #333;
+}
+
+/* 입력창 스타일 */
+input[type="email"],
+input[type="text"],
+input[type="password"] {
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* 입력창 포커스 시 스타일 */
+input[type="email"]:focus,
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #007BFF;
+    outline: none;
+}
+
+/* placeholder 스타일 */
+input[type="email"]::placeholder,
+input[type="text"]::placeholder,
+input[type="password"]::placeholder {
+    color: #888;
+}
+
+/* 버튼 스타일 */
+button {
+    padding: 12px;
+    background-color: #007BFF;
+    color: white;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+/* 버튼 hover 시 스타일 */
+button:hover {
+    background-color: #0056b3;
+}
+
+/* 메시지 스타일 */
+.message {
+    text-align: center;
+    margin-top: 20px;
+    font-size: 16px;
+}
+
+/* 에러 메시지 스타일 */
+.error-message {
+    color: red;
+}
+
+/* 성공 메시지 스타일 */
+.success-message {
+    color: green;
+}
+.footer{
+	text-align: center;
+	align-items: center;
+}
+/* 버튼 컨테이너 가로 정렬 */
+.btn-box {
+    display: flex;
+    gap: 15px; /* 버튼 간격 조정 */
+    align-items: center;
+}
+.viewOrderList {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    padding: 3px; /* 패딩 최소화 */
+    height: auto;
+}
+
+.viewOrderList a {
+    color: black;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* 세로 정렬 */
+    padding: 2px; /* 내부 패딩 최소화 */
+    text-align: center;
+    font-size: 12px; /* 텍스트 크기 더 줄이기 */
+    line-height: 1; /* 줄 간격 줄이기 */
+}
+
+.viewOrderList a i {
+    font-size: 14px; /* 아이콘 크기 더 줄이기 */
+    margin-bottom: 1px; /* 간격 최소화 */
+}
+
+/* hover 효과 */
+.viewOrderList:hover {
+    background-color: #FDF7F4;
+}

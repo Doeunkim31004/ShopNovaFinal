@@ -1,0 +1,84 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.signup-container {
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    width: 380px;
+    text-align: center;
+}
+
+.signup-container input {
+    margin: 10px 0;
+    padding: 14px;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease;
+}
+
+.signup-container input:focus {
+    border-color: #0056b3;
+}
+
+.submitBtn {
+    background-color: #0056b3;
+    color: white;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 20px;
+    transition: background-color 0.3s ease;
+}
+
+.submitBtn:hover {
+    background-color: #003f8f;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 36px;
+    font-weight: bold;
+    background: linear-gradient(to right, #0033A0, #FF6600, #0099FF, #FFD700);
+    -webkit-background-clip: text;
+    color: transparent;
+    cursor: pointer;
+    text-align: center;
+}
+
+.naver-login-button {
+   border: none;
+    background-color: #1EC800;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 20px;
+    width: 100%;
+    font-size: 16px;
+}
+
+.naver-login-button:hover {
+    background-color: #149500;
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
+}
+

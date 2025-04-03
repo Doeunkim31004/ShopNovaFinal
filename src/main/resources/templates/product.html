@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>상품 상세</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/css/product.css">
+</head>
+<body>
+   <!-- 오류 메시지 표시 -->
+   <div th:if="${errorMessage}" class="alert alert-error">
+       <p th:text="${errorMessage}"></p>
+   </div>
+   
+   <!-- 성공 메시지 표시 -->
+   <div th:if="${successMessage}" class="alert alert-success">
+       <p th:text="${successMessage}"></p>
+   </div>
+
+   <!-- 헤더 -->
+   <header>
+       <a href="/" style="text-decoration: none;">
+           <h1>ShopNova</h1>
+       </a>
+      <form id="search-form" action="/search" method="GET" style="flex-grow: 1; margin: 0 20px;">
+         <input type="text" id="search-input" class="search-input" placeholder="상품을 검색하세요." name="query">
+         <a href="javascript:;" id="headerSearchBtn" class="search" title="검색">
+          <i class="fas fa-search"></i> <!-- Font Awesome 검색 아이콘 추가 -->
+         </a>
+     </form>
+       <div class="login-container">
+           <div th:if="${currentUser == null}">
+               <div class="btn-box">
+              <div class="viewOrderList">
+                    <a href="/users/login">
+                    <i class="fa-solid fa-right-to-bracket"></i>
+                    </a>
+                        <a href="/users/login">로그인</a>
+              </div>
+              <div class="viewOrderList">
+                 <a href="/users/signUp">
+                 <i class="fa-solid fa-user-plus"></i>
+                 </a>
+                <a href="/users/signUp">회원가입</a>
+            </div> 
+          </div>
+           </div>
+           <div th:if="${currentUser != null}">
+                <div class="btn-box">
+              <div class="viewOrderList">
+                    <a href="/users/mypage">
+                    <i class="fa-solid fa-circle-user"></i>
+                    </a>
+                        <a href="/users/mypage">마이페이지</a>
+              </div>
+              <div class="viewOrderList">
+                 <form action="/users/logout" method="post">
+                 <button type="submit" class="logout-btn">
+                  <i class="fa-solid fa-right-from-bracket"></i> 로그아웃
+                    </button>
+             </form>
+            </div> 
+          </div>
+           </div>
+       </div>
+   </header>
+
+   <nav class="menu">
+       <a th:href="@{/electronics}">전자제품</a>
+       <a th:href="@{/clothing}">의류</a>
+       <a th:href="@{/food}">식품</a>
+       <a th:href="@{/beauty}">화장품</a>
+       <a th:href="@{/sports}">스포츠</a>
+   </nav>
+   
+   <div class="container">
+
+           <!-- 상품 이미지 -->
+           <div class="product-image">
+               <img th:src="${product.image}" alt="상품 이미지" id="product-image">
+           </div>
+          <div class="product-info">
+           <!-- 상품 정보 -->
+           <h2 th:text="${product.name}" id="product-name">상품명</h2>
+           <p class="price" th:text="${product.price} + '원'" id="product-price">가격</p>
+           <p th:text="${product.description}" id="product-description">설명</p>
+   
+           <!-- 별점 -->
+           <div class="rating">
+               <span th:each="star : ${#numbers.sequence(1, product.rating)}">★</span>
+               <span th:each="empty : ${#numbers.sequence(product.rating + 1, 5)}"></span>
+               <span th:text="'(' + ${product.rating} + '/5)'"></span>
+           </div>
+   
+           
+	      <form id="product-form" method="POST" action="/cart/add">
+	    		<!-- 상품 ID -->
+	    		<th:block th:if="${product != null}">
+	       		 <input type="hidden" name="productId" th:value="${product.id}">
+	    		</th:block>
+	
+			    <!-- 사용자 ID (로그인한 경우에만 추가) -->
+			    <th:block th:if="${currentUser != null}">
+			        <input type="hidden" name="userId" th:value="${currentUser.id}">
+			    </th:block>
+	
+			    <!-- 구매 수량 선택 -->
+			    <div class="quantity">
+			        <label for="quantity">구매 수량:</label>
+			        <input type="number" id="quantity" name="quantity" min="1" value="1">
+			    </div>
+	
+			    <!-- 장바구니 & 구매 버튼 -->
+			    <div class="buy-buttons">
+			        <button type="submit" name="action" value="addToCart" class="cart">장바구니 담기</button>
+			        <button type="submit" name="action" value="buyNow" class="buy" formaction="/order/buyNow">바로구매</button>
+			    </div>
+			</form>
+      </div>
+   </div>
+   <script src="/js/product.js"></script>
+</body>
+</html>
+

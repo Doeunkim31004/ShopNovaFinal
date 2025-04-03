@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>주문</title>
+    <link rel="stylesheet" href="/css/orderPayment.css">
+    <script src="/webjars/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+<header>
+	 <a href="/" style="text-decoration: none;">
+        <h1>ShopNova</h1>
+      </a>
+</header>
+    <h2>결제 화면</h2>
+    <form action="/order/orderCompleted" method="POST">
+        <div id="order-container">
+            <!-- 왼쪽: 상품 목록 -->
+            <div id="order-items">
+                <h3>선택한 상품</h3>
+                <!-- 선택된 상품들을 여기에 나열 -->
+                <div th:each="entry : ${selectedProducts}" class="order-item">
+                    <img th:src="@{${entry.key.image}}" alt="상품 이미지" class="item-image">
+                    <div class="order-item-details">
+                        <p th:text="${entry.key.name}">상품 이름</p>
+                        <p>가격: <span th:text="${#numbers.formatDecimal(entry.key.price, 0, '0')}">상품 가격</span> 원</p>
+                        <p>수량: <span id="product-${entry.key.id}-quantity" th:text="${entry.value}">수량</span> 개</p>
+                        <p>합계: <span th:text="${#numbers.formatDecimal(entry.key.price * entry.value, 0, '0')}">합계</span> 원</p>
+                        <input type="hidden" name="productIds[]" th:value="${entry.key.id}" />
+                        <input type="hidden" name="productNames[]" th:value="${entry.key.name}" />
+                        <input type="hidden" name="productQuantities[]" th:value="${entry.value}" />
+                        <input type="hidden" name="productPrices[]" th:value="${entry.key.price}" />
+                    </div>
+                </div>
+            </div>
+
+            <!-- 오른쪽: 결제 정보 -->
+            <div id="payment-details">
+                <h3>결제 정보</h3>
+                <div class="payment-info">
+                    <p>보내는 사람: <span id="senderName" th:text="${currentUser.name}">이름</span></p>
+                    <p>받는 사람: <input type="text" name="recipientName" placeholder="받는 사람 이름" required></p>
+                    <p>주소: <input type="text" name="address" placeholder="주소 입력" required></p>
+                    <p>전화번호: <input type="text" name="phoneNumber" placeholder="전화번호 입력" required></p>
+                    <p>총 결제 금액: <span id="totalAmount" th:text="${totalAmount}">0</span> 원</p>
+                    <input type="hidden" name="totalAmount" th:value="${totalAmount}"/>
+                </div>
+
+                <button type="submit" id="checkout-button" class="checkout-button">결제 진행</button>
+            </div>
+        </div>
+    </form>
+    <script type="text/javascript" src="https://cdn.iamport.kr/v1/iamport.js"></script>
+    <script src="/js/orderPayment.js"></script>
+</body>
+</html>

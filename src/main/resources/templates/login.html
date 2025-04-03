@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
+   <div class="container" id="login-container">
+       <header>
+           <h1>ShopNova</h1>
+       </header>
+   
+       <form action th:action="@{/users/login}" method="post" id="login-form">
+           <div>
+               <input type="email" name="email" id="email" placeholder="아이디(이메일)" autocomplete="off" required>
+           </div>
+   
+           <div>
+               <input type="password" name="password" id="password" placeholder="비밀번호" required>
+           </div>
+   
+           <div class="find-credentials">
+               <a href="/users/findUserId" id="find-credentials" name="find-credentials">아이디 찾기</a>
+               <a href="/users/findPassword" id="find-password" name="find-password">비밀번호 찾기</a>
+           </div>
+   
+           <button type="submit" id="login-btn" name="login-btn">로그인</button>
+       </form>
+   
+       <!-- 로그아웃 버튼 -->
+       <button id="logout-btn" class="logout-btn" onclick="logout()">로그아웃</button>
+   
+       <!-- 오류 메시지 -->
+       <div class="error-message" th:if="${message != null}">
+           <p th:text="${message}" id="error-message"></p>
+       </div>
+   
+       <!-- 회원가입 링크 -->
+       <button class="signup-link" id="signup-link" name="signup-link" onclick="location.href='/users/signUp'"> 회원가입 </button>
+   </div>
+   <script src="/js/login.js"></script>
+</body>
+</html>

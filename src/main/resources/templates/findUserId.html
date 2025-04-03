@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>아이디 찾기</title>
+    <link rel="stylesheet" href="/css/findUserId.css">
+</head>
+<body>
+    <!-- 아이디 찾기 폼 -->
+    <div class="container">
+        <header>
+            <h1>ShopNova</h1>
+        </header>
+
+        <form action="/users/findUserId" method="post">
+            <div>
+                <input type="phone" name="phone" placeholder="등록된 번호를 입력하세요" required>
+            </div>
+            <button type="submit">아이디 찾기</button>
+        </form>
+
+        <!-- 오류 메시지 표시 -->
+        <div class="error-message">
+            <p th:text="${error}"></p>
+        </div>
+
+        <!-- 찾은 이메일을 표시 -->
+        <div th:if="${email != null}">
+            <p>찾은 이메일 : <span th:text="${email}"></span></p>
+        </div>
+
+        <!-- 비밀번호 찾기 페이지로 이동하는 링크 -->
+        <div class="find-credentials">
+            <a href="/users/findPassword">비밀번호 찾기</a>
+        </div>
+        
+        <!-- 로그인 페이지로 돌아가기 링크 -->
+        <div class="find-credentials">
+            <a href="/users/login">로그인 페이지로 돌아가기</a>
+        </div>
+    </div>
+</body>
+</html>
+

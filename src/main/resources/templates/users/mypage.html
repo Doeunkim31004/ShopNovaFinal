@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="/../css/mypage.css">
+</head>
+<body>
+
+<header>
+    <a href="/" style="text-decoration: none;">
+        <h1>ShopNova</h1>
+         <div class="btn-box">
+	        <div class="viewOrderList">
+	        	<a href="/users/orderList">
+	        	<i class="fa-solid fa-list"></i>
+	        	</a>
+	            <a href="/users/orderList">주문 목록 보기</a>
+	        </div>
+	        <div class="viewOrderList">
+	            <a href="/users/orderList">
+	        	<i class="fa-solid fa-cart-shopping"></i>
+	        	</a>
+	            <a href="/users/cart" >장바구니 바로 가기</a> <!-- 장바구니로 이동하는 링크 추가 -->
+	        </div>
+	        <div class="viewOrderList">
+	        	<a href="/users/orderList">
+	        	<i class="fa-solid fa-right-from-bracket"></i>
+	        	</a>
+	            <a href="/users/logout">로그아웃</a>
+	        </div>
+	        <div class="viewOrderList">
+	        	<a href="/users/orderList">
+	        	<i class="fa-solid fa-house"></i>
+	        	</a>
+	            <a href="/">메인화면</a>
+	        </div>
+	    </div>
+    </a>    
+</header>
+
+<main>
+    <!-- 오류 메시지 표시 -->
+    <div class="message error-message" th:if="${error}">
+        <p>[[${error}]]</p>
+    </div>
+
+    <!-- 성공 메시지 표시 -->
+    <div class="message success-message" th:if="${message}">
+        <p>[[${message}]]</p>
+    </div>
+
+    <div class="mypage-container">
+        <h2>내 정보 수정</h2>
+
+        <!-- 사용자 정보 수정 폼 -->
+        <form action="/users/mypage" method="POST">
+            <div>
+                <label for="email">이메일:</label>
+                <input type="email" id="email" name="email" placeholder="이메일" required>
+            </div>
+
+            <div>
+                <label for="password">비밀번호:</label>
+                <input type="password" id="password" name="password" placeholder="새 비밀번호" required>
+            </div>
+
+            <div>
+                <label for="phone">전화번호:</label>
+                <input type="text" id="phone" name="phone" placeholder="휴대폰" required>
+            </div>
+
+            <div>
+                <label for="address">주소:</label>
+                <input type="text" id="address" name="address" placeholder="주소" required>
+            </div>
+
+            <button type="submit">정보 수정</button>
+        </form>
+    </div>
+</main>
+
+<footer class="footer">
+    <p>&copy; 2025 ShopNova</p>
+</footer>
+</body>
+</html>
