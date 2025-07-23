@@ -15,7 +15,8 @@ RUN ./gradlew build --no-daemon -x test
 
 
 # 실행할 JAR 파일 복사
-COPY build/libs/*.jar app.jar
+COPY build/libs/shopnova-0.0.1-SNAPSHOT.jar app.jar
+
 
 # 실행
 ENTRYPOINT ["java", "-jar", "/app.jar"]
