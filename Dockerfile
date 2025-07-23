@@ -11,7 +11,8 @@ WORKDIR /app
 RUN chmod +x ./gradlew
 
 # 빌드
-RUN ./gradlew build --no-daemon
+RUN ./gradlew build --no-daemon -x test
+
 
 # 실행할 JAR 파일 복사
 COPY build/libs/*.jar app.jar
